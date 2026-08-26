@@ -1,11 +1,12 @@
 {
-    "name": "Tokens to SCSS",
-    "code": "plugin.js",
-    "icon": "icon.png",
-    "description": "Exports all token sets (available Sets) to SCSS files, preserving the references between tokens instead of resolved values",
-    "permissions": [
-      "library:read",
-      "allow:downloads"
-    ]
-  }
-  
+  "name": "Tokens to SCSS",
+  "version": 2, 
+  "host": "https://ezersky.github.io/penpot_export_tokens/",
+  "code": "plugin.js",
+  "icon": "icon.png",
+  "description": "Exports all token sets (available Sets) to SCSS files, preserving the references between tokens instead of resolved values",
+  "permissions": [
+    "library:read",
+    "allow:downloads"
+  ]
+}
