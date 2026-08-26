@@ -1,7 +1,6 @@
 {
   "name": "Tokens to SCSS",
   "description": "Exports all token sets (Global/*, Theme/*, and any other available Sets) to SCSS files, preserving the references between tokens instead of resolved values.",
-  "version": 3,
   "code": "plugin.js",
   "icon": "icon.png",
   "permissions": [
