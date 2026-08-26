@@ -1,0 +1,411 @@
+/**
+ * styles.css — оформление в стиле Penpot UI Kit.
+ *
+ * Честно: реальный npm-пакет @penpot/plugin-styles устанавливается и импортируется
+ * через сборщик (`npm install @penpot/plugin-styles` → `@import "@penpot/plugin-styles/styles.css";`
+ * в глобальный CSS, см. https://help.penpot.app/plugins/create-a-plugin/#plugin-styles).
+ * У этого плагина нет сборки (чистые html/js/css без npm), поэтому пакет физически
+ * не установить — вместо этого здесь вручную воспроизведена визуальная система Penpot:
+ * тёмная тема по умолчанию, mint-акцент (--color-accent-primary), скруглённые контролы,
+ * атрибут data-appearance на кнопках — те же соглашения, что в официальном
+ * penpot-plugin-starter-template. Если вы соберёте плагин через Vite/npm — просто
+ * замените этот файл на настоящий `@import "@penpot/plugin-styles/styles.css";`
+ * и уберите styles.css из index.html.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* -- Primitive tokens (аналог $mint-250, $sz-16 и т.п. из UI Guide Penpot) -- */
+  --mint-150: #7efff2;
+  --mint-300: #00e0b8;
+  --mint-400: #00c2a0;
+  --purple-700: #7efff2; /* используем mint и в тёмной, и в светлой теме плагина — тут нет переключателя темы */
+  --gray-900: #17181a;
+  --gray-800: #1e1f22;
+  --gray-700: #2b2c30;
+  --gray-600: #3b3d42;
+  --gray-500: #59595f;
+  --gray-300: #9a9aa2;
+  --gray-100: #e8e9ea;
+  --red-400: #ff6b6b;
+  --red-300: #ffb3b3;
+
+  /* -- Semantic tokens (аналог --color-accent-primary и т.д.) -- */
+  --color-background-primary: var(--gray-900);
+  --color-background-secondary: var(--gray-800);
+  --color-background-tertiary: var(--gray-700);
+  --color-border: var(--gray-600);
+  --color-foreground-primary: var(--gray-100);
+  --color-foreground-secondary: var(--gray-300);
+  --color-accent-primary: var(--mint-300);
+  --color-accent-primary-hover: var(--mint-150);
+  --color-accent-primary-contrast: #0b1210;
+  --color-danger: var(--red-400);
+  --color-danger-bg: rgba(255, 107, 107, 0.12);
+
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --sz-12: 12px;
+  --sz-16: 16px;
+  --sz-20: 20px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 0;
+  padding: var(--sz-16);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--color-foreground-primary);
+  background: var(--color-background-primary);
+}
+
+h1 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--color-foreground-primary);
+}
+
+p.hint {
+  color: var(--color-foreground-secondary);
+  margin: 0 0 var(--sz-16);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Buttons — соглашение data-appearance, как в official starter template  */
+/* ---------------------------------------------------------------------- */
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: var(--radius-8);
+  border: 1px solid var(--color-border);
+  background: var(--color-background-tertiary);
+  color: var(--color-foreground-primary);
+  padding: 8px var(--sz-12);
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+button:hover { background: var(--gray-600); }
+
+button[data-appearance="primary"] {
+  background: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  color: var(--color-accent-primary-contrast);
+  font-weight: 600;
+  width: 100%;
+}
+button[data-appearance="primary"]:hover { background: var(--color-accent-primary-hover); }
+
+button[data-appearance="secondary"] {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-foreground-primary);
+}
+button[data-appearance="secondary"]:hover { border-color: var(--color-foreground-secondary); }
+
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+button:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 1px; }
+
+/* ---------------------------------------------------------------------- */
+/* Checkbox — "Объединить Global в _variables.scss"                       */
+/* ---------------------------------------------------------------------- */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: var(--sz-12) 0;
+  cursor: pointer;
+  color: var(--color-foreground-primary);
+  user-select: none;
+}
+.checkbox-row code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  background: var(--color-background-tertiary);
+  padding: 1px 4px;
+  border-radius: var(--radius-4);
+}
+.checkbox-row input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-4);
+  background: var(--color-background-tertiary);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.checkbox-row input[type="checkbox"]:hover {
+  border-color: var(--color-foreground-secondary);
+}
+.checkbox-row input[type="checkbox"]:checked {
+  background: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+}
+.checkbox-row input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--color-accent-primary-contrast);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.checkbox-row input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 1px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Text/select inputs — префикс, формат вывода                            */
+/* ---------------------------------------------------------------------- */
+.field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: var(--sz-12) 0;
+}
+.field-row label {
+  color: var(--color-foreground-secondary);
+  flex: 0 0 auto;
+}
+.field-row input[type="text"],
+.field-row select {
+  font: inherit;
+  background: var(--color-background-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-8);
+  color: var(--color-foreground-primary);
+  padding: 6px 8px;
+  width: 140px;
+}
+.field-row input[type="text"]:focus-visible,
+.field-row select:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 1px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Collapsible sections — наборы токенов, свотчи                          */
+/* ---------------------------------------------------------------------- */
+details.section {
+  margin: var(--sz-12) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-8);
+  background: var(--color-background-secondary);
+  padding: 0;
+}
+details.section summary {
+  cursor: pointer;
+  padding: 8px var(--sz-12);
+  font-weight: 600;
+  color: var(--color-foreground-primary);
+  list-style: none;
+}
+details.section summary::-webkit-details-marker { display: none; }
+details.section summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--color-accent-primary);
+  transition: transform 0.15s ease;
+}
+details.section[open] summary::before { transform: rotate(90deg); }
+
+.set-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 var(--sz-12) var(--sz-12);
+}
+.set-row { margin: 0; }
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 8px;
+  padding: 0 var(--sz-12) var(--sz-12);
+  max-height: 220px;
+  overflow-y: auto;
+}
+.swatch { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.swatch__box {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-4);
+  border: 1px solid var(--color-border);
+}
+.swatch__label {
+  font-size: 9px;
+  color: var(--color-foreground-secondary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Warnings panel                                                         */
+/* ---------------------------------------------------------------------- */
+.warnings {
+  margin: var(--sz-12) 0;
+  padding: var(--sz-12);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-8);
+  background: var(--color-danger-bg);
+  color: var(--red-300);
+  font-size: 11px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+.warnings__title { font-weight: 600; margin-bottom: 4px; }
+.warnings ul { margin: 0; padding-left: 18px; }
+.warnings li { margin-bottom: 2px; }
+
+/* ---------------------------------------------------------------------- */
+/* File preview (code)                                                    */
+/* ---------------------------------------------------------------------- */
+.file-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.file-actions { display: flex; gap: 4px; flex: 0 0 auto; }
+.file-preview {
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--gray-900);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-4);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--color-foreground-primary);
+  max-height: 260px;
+  overflow: auto;
+  white-space: pre;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Status / loading indicators                                            */
+/* ---------------------------------------------------------------------- */
+#status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: var(--sz-12) 0;
+  min-height: 20px;
+  color: var(--color-foreground-secondary);
+}
+#status.is-error { color: var(--color-danger); }
+#status.is-success { color: var(--color-accent-primary); }
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent-primary);
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+#status.is-loading .spinner { display: inline-block; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Прогресс-полоска на самой кнопке во время генерации */
+button[data-appearance="primary"].is-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+button[data-appearance="primary"].is-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(11, 18, 16, 0.35);
+  border-top-color: var(--color-accent-primary-contrast);
+  animation: spin 0.7s linear infinite;
+}
+
+/* ---------------------------------------------------------------------- */
+/* File list                                                              */
+/* ---------------------------------------------------------------------- */
+ul#files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+ul#files li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px var(--sz-12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-8);
+  background: var(--color-background-secondary);
+  opacity: 0;
+  transform: translateY(4px);
+  animation: file-in 0.2s ease forwards;
+}
+@keyframes file-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+ul#files li .meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+ul#files li .filename {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-foreground-primary);
+}
+ul#files li .count { font-size: 10px; color: var(--color-foreground-secondary); }
+ul#files li button { padding: 4px 10px; font-size: 11px; flex: 0 0 auto; width: auto; }
+
+#zip-btn { margin-top: var(--sz-12); display: none; }
+
+/* ---------------------------------------------------------------------- */
+/* Skeleton placeholders shown while waiting for the token catalog        */
+/* ---------------------------------------------------------------------- */
+.skeleton-list { display: none; flex-direction: column; gap: 6px; }
+.skeleton-list.is-visible { display: flex; }
+.skeleton-item {
+  height: 40px;
+  border-radius: var(--radius-8);
+  background: linear-gradient(90deg, var(--gray-800) 25%, var(--gray-700) 37%, var(--gray-800) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.link {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+}
+.link:hover { text-decoration: underline; }

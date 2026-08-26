@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Tokens to SCSS</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Tokens → SCSS</h1>
+  <p class="hint">
+    Собирает по одному файлу на каждый набор токенов (все Sets — Global/*, Theme/* и любые
+    другие, какие есть в файле). Ссылки между токенами сохраняются как переменные, а не
+    разворачиваются в resolved-значения.
+  </p>
+
+  <button id="generate-btn" type="button" data-appearance="primary">Собрать SCSS-файлы</button>
+
+  <label class="checkbox-row" for="merge-globals-checkbox">
+    <input type="checkbox" id="merge-globals-checkbox">
+    <span>Объединить Global в <code>_variables.scss</code></span>
+  </label>
+
+  <div class="field-row">
+    <label for="prefix-input">Префикс переменных</label>
+    <input type="text" id="prefix-input" placeholder="например, s3m">
+  </div>
+
+  <div class="field-row">
+    <label for="output-mode-select">Формат вывода</label>
+    <select id="output-mode-select">
+      <option value="scss">SCSS-переменные</option>
+      <option value="css">CSS custom properties</option>
+    </select>
+  </div>
+
+  <div id="status">
+    <span class="spinner" aria-hidden="true"></span>
+    <span id="status-text"></span>
+  </div>
+
+  <div class="skeleton-list" id="skeleton-list">
+    <div class="skeleton-item"></div>
+    <div class="skeleton-item"></div>
+    <div class="skeleton-item"></div>
+  </div>
+
+  <details class="section" id="set-list-section" style="display: none;">
+    <summary>Наборы токенов (выберите, что экспортировать)</summary>
+    <div id="set-list" class="set-list"></div>
+  </details>
+
+  <details class="section" id="swatches-section" style="display: none;">
+    <summary>Цветовые токены (<span id="swatches-count">0</span>)</summary>
+    <div id="swatches" class="swatches"></div>
+  </details>
+
+  <div id="warnings" class="warnings" style="display: none;"></div>
+
+  <ul id="files"></ul>
+
+  <button id="zip-btn" type="button" data-appearance="primary">Скачать всё одним .zip</button>
+
+  <script type="module" src="ui.js"></script>
+</body>
+</html>
